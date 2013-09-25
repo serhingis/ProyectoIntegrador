@@ -84,7 +84,7 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
+                        .addComponent(jTxtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -122,6 +122,11 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
         );
 
         jBtnNuevo.setText("Nuevo");
+        jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNuevoActionPerformed(evt);
+            }
+        });
 
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.setEnabled(false);
@@ -182,6 +187,16 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
     private void jBtnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCerrarActionPerformed
         dispose();
     }//GEN-LAST:event_jBtnCerrarActionPerformed
+
+    private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
+        jTxtNombre.setText("");
+        jTxtApellido.setText("");
+        jTxtDni.setText("");
+        jTxtPresupuesto.setText("");
+        jBtnNuevo.setEnabled(false);
+        jTxtNombre.requestFocus();
+        jBtnGuardar.setEnabled(true);
+    }//GEN-LAST:event_jBtnNuevoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCerrar;
