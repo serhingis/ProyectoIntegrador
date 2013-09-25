@@ -4,6 +4,8 @@
  */
 package ar.com.educacionit.vehiculos.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author educacionit
@@ -50,7 +52,7 @@ public class VendedoresVentana extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Administracion de Vendedores");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Vendedores", 0, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de Vendedores", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         jScrollPane1.setViewportView(jLstVendedores);
 
@@ -130,10 +132,20 @@ public class VendedoresVentana extends javax.swing.JInternalFrame {
 
         jBtnNuevo.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBtnNuevo.setText("Nuevo");
+        jBtnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNuevoActionPerformed(evt);
+            }
+        });
 
         jBtnGuardar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.setEnabled(false);
+        jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarActionPerformed(evt);
+            }
+        });
 
         jBtnEliminar.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jBtnEliminar.setText("Eliminar");
@@ -187,7 +199,7 @@ public class VendedoresVentana extends javax.swing.JInternalFrame {
                     .addComponent(jBtnGuardar)
                     .addComponent(jBtnEliminar)
                     .addComponent(jBtnNuevo1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,6 +209,60 @@ public class VendedoresVentana extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_jBtnNuevo1ActionPerformed
 
+    private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
+        cleanPantalla();
+        jBtnNuevo.setEnabled(false);
+        jTxtNombre.requestFocus();
+        jBtnGuardar.setEnabled(true);
+    }//GEN-LAST:event_jBtnNuevoActionPerformed
+
+    private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
+        
+        if (validaPantalla()) {
+            JOptionPane.showMessageDialog(this, "El vendedor se guardó", "OK", JOptionPane.INFORMATION_MESSAGE);
+            cleanPantalla();
+            jBtnNuevo.setEnabled(true);
+            jBtnGuardar.setEnabled(false);
+        }
+        
+    }//GEN-LAST:event_jBtnGuardarActionPerformed
+
+    public boolean validaPantalla() {
+        
+        if (jTxtNombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el nombre", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtNombre.requestFocus();
+            return false;
+        }
+
+        if (jTxtApellido.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el apellido", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtApellido.requestFocus();
+            return false;
+        }
+
+        if (jTxtNroDocumento.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el documento", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtNroDocumento.requestFocus();
+            return false;
+        }
+
+        if (jTxtAutosVendidos.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar la cantidad de autos vendidos", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtAutosVendidos.requestFocus();
+            return false;
+        }
+        
+        return true;
+    }
+    
+    public void cleanPantalla() {
+        jTxtNombre.setText("");
+        jTxtApellido.setText("");
+        jTxtNroDocumento.setText("");
+        jTxtAutosVendidos.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnEliminar;
     private javax.swing.JButton jBtnGuardar;

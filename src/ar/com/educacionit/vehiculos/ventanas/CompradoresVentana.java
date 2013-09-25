@@ -4,6 +4,8 @@
  */
 package ar.com.educacionit.vehiculos.ventanas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author inf1serg
@@ -130,6 +132,11 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
 
         jBtnGuardar.setText("Guardar");
         jBtnGuardar.setEnabled(false);
+        jBtnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnGuardarActionPerformed(evt);
+            }
+        });
 
         jBtnEliminar.setText("Eliminar");
         jBtnEliminar.setEnabled(false);
@@ -178,7 +185,7 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
                     .addComponent(jBtnGuardar)
                     .addComponent(jBtnEliminar)
                     .addComponent(jBtnCerrar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -189,15 +196,63 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBtnCerrarActionPerformed
 
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
-        jTxtNombre.setText("");
-        jTxtApellido.setText("");
-        jTxtDni.setText("");
-        jTxtPresupuesto.setText("");
+        cleanPantalla();
         jBtnNuevo.setEnabled(false);
         jTxtNombre.requestFocus();
         jBtnGuardar.setEnabled(true);
     }//GEN-LAST:event_jBtnNuevoActionPerformed
 
+    private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
+
+        if (validaPantalla()){
+            
+            JOptionPane.showMessageDialog(this, "El comprador ha sido guardado", "OK", JOptionPane.INFORMATION_MESSAGE);
+            
+            cleanPantalla();
+            
+            jBtnGuardar.setEnabled(false);
+            
+            jBtnNuevo.setEnabled(true);
+        }
+        
+    }//GEN-LAST:event_jBtnGuardarActionPerformed
+
+    public void cleanPantalla() {
+        jTxtNombre.setText("");
+        jTxtApellido.setText("");
+        jTxtDni.setText("");
+        jTxtPresupuesto.setText("");
+    }
+    
+    public boolean validaPantalla() {
+    
+        if (jTxtNombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el nombre", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtNombre.requestFocus();
+            return false;
+        }
+        
+        if (jTxtApellido.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el apellido", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtApellido.requestFocus();
+            return false;
+        }        
+        
+        if (jTxtDni.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el DNI", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtDni.requestFocus();
+            return false;
+        }
+
+        if (jTxtPresupuesto.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Debe cargar el presupuesto", "Error", JOptionPane.WARNING_MESSAGE);
+            jTxtPresupuesto.requestFocus();
+            return false;
+        }
+        
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnCerrar;
     private javax.swing.JButton jBtnEliminar;
