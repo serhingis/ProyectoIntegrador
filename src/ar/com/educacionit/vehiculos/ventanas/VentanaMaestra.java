@@ -38,6 +38,7 @@ public class VentanaMaestra extends javax.swing.JFrame {
         jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setExtendedState(javax.swing.JFrame.MAXIMIZED_BOTH);
 
         jMenu1.setText("Abrir Ventana");
 

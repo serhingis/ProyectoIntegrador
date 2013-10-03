@@ -12,11 +12,18 @@ import javax.swing.JOptionPane;
  */
 public class AutosVentana extends javax.swing.JInternalFrame {
 
+    private boolean abierta;
+
+    public boolean isAbierta() {
+        return abierta;
+    }
+    
     /**
      * Creates new form AutosVentana
      */
     public AutosVentana() {
         initComponents();
+        abierta = true;
     }
 
     /**
@@ -69,7 +76,7 @@ public class AutosVentana extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("Administracion de Autos");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Autos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Autos", 0, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         jLstAutos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "\t" };
@@ -89,13 +96,19 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dimensiones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dimensiones", 0, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
+
+        jTxtAltura.setEnabled(false);
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jLabel1.setText("Altura");
 
         jLabel2.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jLabel2.setText("Ancho");
+
+        jTxtAncho.setEnabled(false);
+
+        jTxtLargo.setEnabled(false);
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         jLabel3.setText("Largo");
@@ -166,6 +179,14 @@ public class AutosVentana extends javax.swing.JInternalFrame {
         Precio.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         Precio.setText("Precio");
 
+        jCmbMarca.setEnabled(false);
+
+        jCmbModelo.setEnabled(false);
+
+        jCmbColor.setEnabled(false);
+
+        jTxtPrecio.setEnabled(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -214,7 +235,7 @@ public class AutosVentana extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caracteristicas / Equipamiento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 1, 12))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Caracteristicas / Equipamiento", 0, 0, new java.awt.Font("Arial", 1, 12))); // NOI18N
 
         jTxtAreaEquipamiento.setColumns(20);
         jTxtAreaEquipamiento.setRows(5);
@@ -312,7 +333,7 @@ public class AutosVentana extends javax.swing.JInternalFrame {
                     .addComponent(jBtnGuardar)
                     .addComponent(jBtnEliminar)
                     .addComponent(jBtnCerrar))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
@@ -324,6 +345,7 @@ public class AutosVentana extends javax.swing.JInternalFrame {
 
     private void jBtnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNuevoActionPerformed
         cleanPantalla();
+        enableDisableFields(true);
         jBtnNuevo.setEnabled(false);
         jTxtAltura.requestFocus();
         jBtnGuardar.setEnabled(true);
@@ -336,10 +358,22 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             cleanPantalla();
             jBtnNuevo.setEnabled(true);
             jBtnGuardar.setEnabled(false);
+            enableDisableFields(false);
         }
         
     }//GEN-LAST:event_jBtnGuardarActionPerformed
 
+    public void enableDisableFields(boolean valor) {
+        jTxtPrecio.setEnabled(valor);
+        jTxtAltura.setEnabled(valor);
+        jTxtAncho.setEnabled(valor);
+        jTxtLargo.setEnabled(valor);
+        jCmbColor.setEnabled(valor);
+        jCmbModelo.setEnabled(valor);
+        jCmbMarca.setEnabled(valor);
+    }
+    
+    
     public boolean validaPantalla() {
         
         try {
@@ -373,8 +407,6 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             jTxtPrecio.requestFocus();
             return false;
         }
-        
-        
         return true;
     }
     
@@ -418,4 +450,6 @@ public class AutosVentana extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTxtLargo;
     private javax.swing.JTextField jTxtPrecio;
     // End of variables declaration//GEN-END:variables
+
+
 }
