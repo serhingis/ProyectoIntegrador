@@ -342,29 +342,38 @@ public class AutosVentana extends javax.swing.JInternalFrame {
 
     public boolean validaPantalla() {
         
-        if (jTxtAltura.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe completar la Altura", "Error", JOptionPane.WARNING_MESSAGE);
+        try {
+            int myInt = Integer.parseInt(jTxtAltura.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "La altura debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtAltura.requestFocus();
             return false;
         }
         
-        if (jTxtAncho.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe completar el Ancho", "Error", JOptionPane.WARNING_MESSAGE);
+        try {
+            int myInt = Integer.parseInt(jTxtAncho.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "El ancho debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtAncho.requestFocus();
             return false;
-        }        
+        }
         
-        if (jTxtLargo.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe completar el Largo", "Error", JOptionPane.WARNING_MESSAGE);
+        try {
+            int myInt = Integer.parseInt(jTxtLargo.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "La altura debe ser un número entero", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtLargo.requestFocus();
             return false;
         }
-
-        if (jTxtPrecio.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe completar el Precio", "Error", JOptionPane.WARNING_MESSAGE);
+        
+        try {
+            Double myDouble = Double.parseDouble(jTxtPrecio.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "El precio debe ser un número con decimales", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtPrecio.requestFocus();
             return false;
         }
+        
         
         return true;
     }

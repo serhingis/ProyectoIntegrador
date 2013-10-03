@@ -247,10 +247,12 @@ public class VendedoresVentana extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (jTxtAutosVendidos.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe cargar la cantidad de autos vendidos", "Error", JOptionPane.WARNING_MESSAGE);
+        try {
+            int myInt = Integer.parseInt(jTxtAutosVendidos.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "La cantidad de autos vendidos debe ser un numero entero", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtAutosVendidos.requestFocus();
-            return false;
+            return false;            
         }
         
         return true;

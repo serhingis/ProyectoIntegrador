@@ -244,8 +244,10 @@ public class CompradoresVentana extends javax.swing.JInternalFrame {
             return false;
         }
 
-        if (jTxtPresupuesto.getText().equals("")) {
-            JOptionPane.showMessageDialog(this, "Debe cargar el presupuesto", "Error", JOptionPane.WARNING_MESSAGE);
+        try {
+            Double myDouble = Double.parseDouble(jTxtPresupuesto.getText());
+        } catch(Exception e) {
+            JOptionPane.showMessageDialog(this, "El presupuesto debe ser un numero con decimales", "Error", JOptionPane.WARNING_MESSAGE);
             jTxtPresupuesto.requestFocus();
             return false;
         }
