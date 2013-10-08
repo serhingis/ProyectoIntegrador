@@ -4,6 +4,10 @@
  */
 package ar.com.educacionit.vehiculos.ventanas;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,20 +16,102 @@ import javax.swing.JOptionPane;
  */
 public class AutosVentana extends javax.swing.JInternalFrame {
 
-    private boolean abierta;
+    //private boolean abierta;
 
-    public boolean isAbierta() {
-        return abierta;
-    }
+    //public boolean isAbierta() {
+    //    return abierta;
+   // }
     
     /**
      * Creates new form AutosVentana
      */
     public AutosVentana() {
         initComponents();
-        abierta = true;
+      //  abierta = true;
+        
+        try {
+            cargarMarcas();
+            cargarModelos();
+            cargarColores();
+        } catch(IOException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar combos", "Error", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
     }
 
+    
+    private void cargarMarcas() throws IOException {
+        
+        jCmbMarca.removeAllItems();
+        jCmbMarca.addItem("Seleccione");
+        
+        String archivoMarcas = "/ar/com/educacionit/vehiculos/recursos/marcas.txt";
+        
+        InputStreamReader isr = new InputStreamReader( AutosVentana.class.getResourceAsStream(archivoMarcas) );
+        
+        // Construye un BufferedReader
+        BufferedReader readerMarcas = new BufferedReader( isr );
+        
+        // Define variables
+        boolean eof = false;
+        String lineaLeida = "";
+        
+        // Lee el archivo "in" de forma eficiente e imprime los datos en pantalla
+        while ( !eof ) {
+               lineaLeida = readerMarcas.readLine();
+               if(lineaLeida != null ) {
+                   jCmbMarca.addItem(lineaLeida);
+               }  else {
+                   eof = true;
+               }
+        }
+
+        readerMarcas.close();
+        
+    }
+    
+    private void cargarColores() throws IOException {
+
+        jCmbColor.removeAllItems();
+        jCmbColor.addItem("Seleccione");
+        
+        String archivoColores = "/ar/com/educacionit/vehiculos/recursos/colores.txt";
+        
+        InputStreamReader isr = new InputStreamReader( AutosVentana.class.getResourceAsStream(archivoColores) );
+        
+        // Construye un BufferedReader
+        BufferedReader readerColores = new BufferedReader( isr );
+        
+        // Define variables
+        boolean eof = false;
+        String lineaLeida = "";
+        
+        // Lee el archivo "in" de forma eficiente e imprime los datos en pantalla
+        while ( !eof ) {
+               lineaLeida = readerColores.readLine();
+               if(lineaLeida != null ) {
+                   jCmbColor.addItem(lineaLeida);
+               }  else {
+                   eof = true;
+               }
+        }
+
+        readerColores.close();        
+    }
+    
+    private void cargarModelos() {
+        
+        jCmbModelo.removeAllItems();
+        int curYear = Calendar.getInstance().get(Calendar.YEAR);
+        
+        jCmbModelo.addItem("Seleccione");
+        for(int i = 1985; i <= curYear; i++) {
+            jCmbModelo.addItem(i);
+        }
+    
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -400,6 +486,24 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             return false;
         }
         
+        if (jCmbMarca.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar marca", "Error", JOptionPane.WARNING_MESSAGE);
+            jCmbMarca.requestFocus();
+            return false;
+        }
+        
+        if (jCmbModelo.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar modelo", "Error", JOptionPane.WARNING_MESSAGE);
+            jCmbModelo.requestFocus();
+            return false;
+        }
+        
+        if (jCmbColor.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar color", "Error", JOptionPane.WARNING_MESSAGE);
+            jCmbColor.requestFocus();
+            return false;
+        }
+        
         try {
             Double myDouble = Double.parseDouble(jTxtPrecio.getText());
         } catch(Exception e) {
@@ -407,6 +511,7 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             jTxtPrecio.requestFocus();
             return false;
         }
+        
         return true;
     }
     
@@ -415,6 +520,14 @@ public class AutosVentana extends javax.swing.JInternalFrame {
         jTxtAncho.setText("");
         jTxtLargo.setText("");
         jTxtPrecio.setText("");
+        try {
+            cargarColores();
+            cargarMarcas();
+            cargarModelos();
+        } catch(IOException e) {
+            System.out.println("Error al cargar combos");
+        }
+        
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
