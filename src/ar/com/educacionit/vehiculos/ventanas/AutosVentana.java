@@ -4,10 +4,12 @@
  */
 package ar.com.educacionit.vehiculos.ventanas;
 
+import ar.com.educacionit.vehiculos.entidades.Auto;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Calendar;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,18 +18,15 @@ import javax.swing.JOptionPane;
  */
 public class AutosVentana extends javax.swing.JInternalFrame {
 
-    //private boolean abierta;
-
-    //public boolean isAbierta() {
-    //    return abierta;
-   // }
     
+    DefaultListModel modeloAutos = new DefaultListModel();
     /**
      * Creates new form AutosVentana
      */
     public AutosVentana() {
         initComponents();
-      //  abierta = true;
+
+        jLstAutos.setModel(modeloAutos);
         
         try {
             cargarMarcas();
@@ -168,6 +167,11 @@ public class AutosVentana extends javax.swing.JInternalFrame {
             String[] strings = { "\t" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        jLstAutos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLstAutosMouseClicked(evt);
+            }
         });
         jScrollPane2.setViewportView(jLstAutos);
 
@@ -414,11 +418,12 @@ public class AutosVentana extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnNuevo)
-                    .addComponent(jBtnGuardar)
-                    .addComponent(jBtnEliminar)
-                    .addComponent(jBtnCerrar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBtnNuevo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBtnGuardar)
+                        .addComponent(jBtnEliminar)
+                        .addComponent(jBtnCerrar)))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
 
@@ -440,6 +445,18 @@ public class AutosVentana extends javax.swing.JInternalFrame {
     private void jBtnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnGuardarActionPerformed
         
         if (validaPantalla()) {
+
+            Auto auto = new Auto();
+            auto.setAlto(Integer.parseInt(jTxtAltura.getText()));
+            auto.setAncho(Integer.parseInt(jTxtAncho.getText()));
+            auto.setLargo(Integer.parseInt(jTxtLargo.getText()));
+            auto.setColor( (String) jCmbColor.getSelectedItem());
+            auto.setMarca( (String) jCmbMarca.getSelectedItem() );
+            auto.setModelo(jCmbModelo.getSelectedItem().toString());
+            auto.setPrecio(Double.parseDouble(jTxtPrecio.getText()));
+            
+            modeloAutos.addElement(auto);
+            
             JOptionPane.showMessageDialog(this, "Auto grabado correctamente", "OK", JOptionPane.INFORMATION_MESSAGE);
             cleanPantalla();
             jBtnNuevo.setEnabled(true);
@@ -448,6 +465,16 @@ public class AutosVentana extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_jBtnGuardarActionPerformed
+
+    private void jLstAutosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLstAutosMouseClicked
+
+        jBtnEliminar.setEnabled(true);
+        jBtnGuardar.setEnabled(true);
+        
+        Auto a = (Auto) jLstAutos.getSelectedValue();
+        jTxtAltura.setText(String.valueOf(a.getAlto()));
+        
+    }//GEN-LAST:event_jLstAutosMouseClicked
 
     public void enableDisableFields(boolean valor) {
         jTxtPrecio.setEnabled(valor);

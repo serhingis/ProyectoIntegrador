@@ -84,11 +84,13 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jSeparator1" min="-2" pref="11" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jBtnNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jBtnNuevo" alignment="1" min="-2" pref="25" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jBtnGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnCerrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
@@ -135,6 +137,9 @@
                   </StringArray>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLstAutosMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

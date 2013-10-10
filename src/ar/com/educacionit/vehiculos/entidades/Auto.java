@@ -15,6 +15,11 @@ public class Auto extends Vehiculo{
     private String marca;
     private String modelo;
     private String color;
+    private Double precio;
+    
+    public Auto() {
+        
+    }
     
     public Auto(String marca, String modelo, String color, int largo, int ancho, int alto) {
         
@@ -28,8 +33,8 @@ public class Auto extends Vehiculo{
     
     @Override
     public String toString() {
-        return "-- Auto-------- \n Marca: " + marca + "\n Modelo: " + modelo + "\n Color: " + color + "\n Alto: " + super.getAlto() + "\n Ancho: " + super.getAncho() 
-                + " Largo: " + super.getLargo();
+        return marca + " " + modelo + " " + color + " " + super.getAlto() + " " + super.getAncho() 
+                + " " + super.getLargo();
     }
 
     public String getMarca() {
@@ -54,6 +59,14 @@ public class Auto extends Vehiculo{
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Double getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Double precio) {
+        this.precio = precio;
     }
     
 }
